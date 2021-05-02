@@ -14,8 +14,8 @@ app.get('/', (req, res) => {
 app.post('/user', (req, res) => {
     console.log("Creating New User")
     console.log("Backend Request Path: /user")
-    const {username, name, password, favouriteFruit, favouriteMovie, favouriteNumber} = req.body;
-    console.log({username, name, password, favouriteNumber, favouriteMovie, favouriteFruit});
+    const { username, name, password, favouriteFruit, favouriteMovie, favouriteNumber } = req.body;
+    console.log({ username, name, password, favouriteNumber, favouriteMovie, favouriteFruit });
 
     const accounts = fs.readFileSync('./storage/account.json', 'utf-8');
 
@@ -31,7 +31,7 @@ app.post('/user', (req, res) => {
         favouriteNumber,
     }
 
-    if(!data[username]) data[username] = user;
+    if (!data[username]) data[username] = user;
     else res.send("Account Already Exists");
 
     fs.writeFileSync('./storage/account.json', JSON.stringify(data, 2, 4), 'utf-8', res.send("Account Created"));
@@ -46,7 +46,7 @@ app.delete('/user', (req, res) => {
     const accounts = fs.readFileSync('./storage/account.json', 'utf-8');
     const data = JSON.parse(accounts);
 
-    if(data[username]) delete data[username];
+    if (data[username]) delete data[username];
     else res.send("Account Does Not Exist");
 
     console.log(data);
@@ -59,8 +59,8 @@ app.put('/user', (req, res) => {
     console.log(`Backend Request Path: /deleteUser?username=${username}`);
     const accounts = fs.readFileSync('./storage/account.json', 'utf-8');
 
-    const {name, password, favouriteFruit, favouriteMovie, favouriteNumber} = req.body;
-    console.log({username, name, password, favouriteNumber, favouriteMovie, favouriteFruit});
+    const { name, password, favouriteFruit, favouriteMovie, favouriteNumber } = req.body;
+    console.log({ username, name, password, favouriteNumber, favouriteMovie, favouriteFruit });
 
     const data = JSON.parse(accounts);
 
@@ -71,7 +71,7 @@ app.put('/user', (req, res) => {
         favouriteNumber,
     }
 
-    if(data[username]) data[username] = user;
+    if (data[username]) data[username] = user;
     else res.send("Account Does NOT Exist");
 
     console.log(data);
@@ -82,5 +82,7 @@ app.put('/user', (req, res) => {
 http.createServer(app).listen(9999, () => {
     console.log("Application listening on PORT 9999");
 });
+
+module.exports = app
 
 
