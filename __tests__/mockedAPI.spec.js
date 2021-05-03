@@ -10,6 +10,15 @@ const user = {
     "favouriteNumber": "alt 23"
 }
 
+const user2 = {
+    "name": "Altair2",
+    "username": "altuname",
+    "password": "123456!2",
+    "favouriteFruit": "alt fruit2",
+    "favouriteMovie": "alt Room2",
+    "favouriteNumber": "alt 232"
+}
+
 const nonUser = {}
 
 test("Check root path ", async done => {
@@ -45,8 +54,8 @@ test("Create Existing User", async done => {
 test("Update User", async done => {
     const res = await request(app)
         .put("/user")
-        .send(user)
-    expect(res.request._data).toEqual(user)
+        .send(user2)
+    expect(res.request._data).toEqual(user2)
     expect(res.req.method).toBe('PUT');
     expect(res.statusCode).toBe(200);
     expect(res.text).toBe('Account Updated');
